@@ -16,7 +16,7 @@ var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -33,16 +33,23 @@ app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
 
   // Request methods you wish to allow
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
 
   // Request headers you wish to allow
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type,authorization');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, content-type, Authorization, multipart/form-data, text/plain');
 
   // Set to true if you need the website to include cookies in the requests sent
   // to the API (e.g. in case you use sessions)
-  //res.setHeader('Access-Control-Allow-Credentials', true);
+  // res.setHeader('Access-Control-Allow-Credentials', true);
   next();
 });
+
+// app.use(function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Authorization, Content-Type, multipart/form-data, text/plain, Accept");
+//   next();
+// });
 
 app.use('/', index);
 app.use('/users', users);

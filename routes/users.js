@@ -19,11 +19,29 @@ router.post('/register', function (req, res, next) {
       email: req.body.email,
       password: hash
     });
-  user.save(function (err, doc) {
-    if (err) return next(err);
-    res.json(doc);
-  })
+    user.save(function (err, doc) {
+      if (err) return next(err);
+      res.json(doc);
+    })
+  });
 });
 
-});
+router.post('/login', function (req, res, next) {
+  if(req.body.username && req.body.password) {
+    Users.findOne({username: req.body.username}, function (err, user) {
+      console.log('......................', user);
+      if (err) {
+        return next(err);
+      }
+      bcrypt.compare(req.body.password, user.password, function(err, loginSuccess) {
+        if (loginSuccess) {
+          console.log('......................', user);
+          res.json(user);
+        } else {
+          return next(err);
+        }
+      });
+    })
+  }
+})
 module.exports = router;
