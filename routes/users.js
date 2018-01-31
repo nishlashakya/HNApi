@@ -43,5 +43,15 @@ router.post('/login', function (req, res, next) {
       });
     })
   }
+});
+
+router.get('/:id', function (req, res, next) {
+  Users.findById(req.params.id, function (err, user) {
+    if(err) {
+      return next(err);
+    }
+    console.log('......user.........', user);
+    res.json(user);
+  })
 })
 module.exports = router;

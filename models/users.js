@@ -9,7 +9,8 @@ var userSchema = mongoose.Schema({
     default: Date.now
   },
   about: String,
-  points: String
+  points: String,
+  karma: Number
 
 })
 
