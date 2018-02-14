@@ -10,7 +10,10 @@ var userSchema = mongoose.Schema({
   },
   about: String,
   points: String,
-  karma: Number
+  karma: {
+    type: Number,
+    default: '1'
+  },
 
 })
 
