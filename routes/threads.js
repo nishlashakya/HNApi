@@ -8,9 +8,9 @@ var Threads = require('../models/threads');
 router.post('/', function(req, res, next) {
   const thread = new Threads(req.body);
   thread.save(function(err, thread) {
-			if(err) return next(err);
-			res.json(thread);
-		});
+		if(err) return next(err);
+		res.json(thread);
+	});
 });
 
 router.get('/', function(req, res, next) {

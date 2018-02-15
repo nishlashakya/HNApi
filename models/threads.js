@@ -7,7 +7,10 @@ var threadSchema = mongoose.Schema({
     type: Date,
     default: Date.now
   },
-  points: String,
+  points: {
+    type: String,
+    default: '1'
+  },
   createdBy: {
     type: String,
     // default: '1'
