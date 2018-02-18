@@ -19,4 +19,10 @@ router.get('/', function(req, res, next) {
   })
 });
 
+router.get('/:id', function(req, res, next) {
+  Threads.findById(req.params.id, function (err, thread) {
+    res.json(thread);
+  })
+});
+
 module.exports = router;
