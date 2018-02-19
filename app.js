@@ -9,6 +9,7 @@ var mongoose = require('mongoose');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var threads = require('./routes/threads');
+var comments = require('./routes/comments');
 
 mongoose.connect('mongodb://localhost/hackerNews_db');
 var db = mongoose.collection;
@@ -55,6 +56,7 @@ app.use(function (req, res, next) {
 app.use('/', index);
 app.use('/users', users);
 app.use('/threads', threads);
+app.use('/comments', comments);
 
 
 // catch 404 and forward to error handler
