@@ -9,7 +9,7 @@ const schema = mongoose.Schema({
   _id           : { type: ObjectId, auto: true},
   threadId      : { type: ObjectId, ref: 'Threads' },
   createdDate   : { type: Date, default: Date.now },
-  commentedBy   : { type: ObjectId, ref: 'Users' },
+  commentedBy   : { type: String },
   comment       : String
 });
 

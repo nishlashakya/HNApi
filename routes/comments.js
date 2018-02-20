@@ -13,12 +13,12 @@ router.post('/', function(req, res, next) {
 	});
 });
 
-router.get('/', function(req, res, next) {
-  Comments.find({threadId: req.body.threadId}, function (err, comments) {
+router.get('/:threadId', function(req, res, next) {
+  Comments.find({threadId: req.params.threadId}, function (err, comments) {
     res.json(comments);
-  })
+  });
 });
-// 
+//
 // router.get('/:id', function(req, res, next) {
 //   Comments.findById(req.params.id, function (err, thread) {
 //     res.json(thread);
