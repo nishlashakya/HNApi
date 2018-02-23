@@ -11,6 +11,10 @@ var threadSchema = mongoose.Schema({
     type: String,
     default: '1'
   },
+  commentCount: {
+    type: Number,
+    default: 0
+  },
   createdBy: {
     type: String,
     // default: '1'

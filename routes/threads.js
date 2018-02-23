@@ -25,4 +25,10 @@ router.get('/:id', function(req, res, next) {
   })
 });
 
+router.put('/:id', function(req, res, next) {
+  Threads.findByIdAndUpdate(req.params.id, req.body, { new:true }, function (err, thread) {
+    res.json(thread);
+  })
+});
+
 module.exports = router;
