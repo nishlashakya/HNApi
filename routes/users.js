@@ -1,9 +1,11 @@
 var express = require('express');
 var router = express.Router();
 
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+
 var Users = require('../models/users');
 
-const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 /* GET users listing. */
@@ -29,14 +31,16 @@ router.post('/register', function (req, res, next) {
 router.post('/login', function (req, res, next) {
   if(req.body.username && req.body.password) {
     Users.findOne({username: req.body.username}, function (err, user) {
-      console.log('......................', user);
       if (err) {
         return next(err);
       }
       bcrypt.compare(req.body.password, user.password, function(err, loginSuccess) {
         if (loginSuccess) {
-          console.log('......................', user);
-          res.json(user);
+          var token = jwt.sign(user.toJSON(), 'secret', { expiresIn: 60 * 60 * 24 * 7 });
+          res.json({
+            user,
+            token
+          });
         } else {
           return next(err);
         }
@@ -50,8 +54,14 @@ router.get('/:id', function (req, res, next) {
     if(err) {
       return next(err);
     }
-    console.log('......user.........', user);
     res.json(user);
   })
 })
+
+router.put('/:id', function (req, res, next) {
+  Users.findByIdAndUpdate(req.params.id, req.body, { new:true }, function (err, user) {
+    res.json(user);
+  });
+});
+
 module.exports = router;

@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var Comments = require('../models/comments');
-
+var checkToken = require('../utils/checkToken');
 
 /* GET home page. */
 router.post('/', function(req, res, next) {

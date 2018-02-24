@@ -2,10 +2,10 @@ var express = require('express');
 var router = express.Router();
 
 var Threads = require('../models/threads');
-
+var checkToken = require('../utils/checkToken')
 
 /* GET home page. */
-router.post('/', function(req, res, next) {
+router.post('/', checkToken, function(req, res, next) {
   const thread = new Threads(req.body);
   thread.save(function(err, thread) {
 		if(err) return next(err);
@@ -25,7 +25,7 @@ router.get('/:id', function(req, res, next) {
   })
 });
 
-router.put('/:id', function(req, res, next) {
+router.put('/:id', checkToken, function(req, res, next) {
   Threads.findByIdAndUpdate(req.params.id, req.body, { new:true }, function (err, thread) {
     res.json(thread);
   })
