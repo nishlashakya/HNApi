@@ -11,7 +11,7 @@ var users = require('./routes/users');
 var threads = require('./routes/threads');
 var comments = require('./routes/comments');
 
-mongoose.connect('mongodb://localhost/hackerNews_db');
+mongoose.connect('mongodb://root:password@ds257808.mlab.com:57808/hackernews');
 var db = mongoose.collection;
 
 var app = express();
